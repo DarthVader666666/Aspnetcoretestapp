@@ -23,11 +23,9 @@ namespace Aspnetcoretestapp.Controllers
 
             dbContext.Events.Add(new Event 
             {
-                EventId = 1,
                 Title = "Test Title",
                 Theme = new Theme 
                 {
-                    ThemeId = 1,
                     ThemeName = "Default",
                 },
                 Date = DateTime.Now                
