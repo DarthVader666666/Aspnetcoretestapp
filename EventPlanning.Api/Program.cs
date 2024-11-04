@@ -19,7 +19,7 @@ policy.WithOrigins($"{builder.Configuration["ClientUrl"]}")
     ));
 
 builder.Services.AddAuthorization();
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+builder.Services.AddAuthentication("Azure AD").AddJwtBearer(options =>
 {
     options.TokenValidationParameters = new TokenValidationParameters
     {
