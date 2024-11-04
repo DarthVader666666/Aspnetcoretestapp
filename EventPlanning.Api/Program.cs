@@ -39,18 +39,21 @@ builder.Services.AddScoped<IRepository<Event>, EventRepository>();
 builder.Services.AddScoped<IRepository<UserEvent>, UserEventRepository>();
 builder.Services.AddScoped<IRepository<User>, UserRepository>();
 
-var connectionString = builder.Configuration.GetConnectionString("EventDb");
+//var connectionString = builder.Configuration.GetConnectionString("EventDb");
 
-if (builder.Environment.IsDevelopment() && connectionString != null)
-{
-    builder.Services.AddDbContext<EventPlanningDbContext>(options => options.UseSqlServer(connectionString));
-    MigrateDatabase();
-}
-else
-{
-    builder.Services.AddDbContext<EventPlanningDbContext>(options => options.UseInMemoryDatabase("EventDb"));
-    SeedDatabase();
-}
+//if (builder.Environment.IsDevelopment() && connectionString != null)
+//{
+//    builder.Services.AddDbContext<EventPlanningDbContext>(options => options.UseSqlServer(connectionString));
+//    MigrateDatabase();
+//}
+//else
+//{
+//    builder.Services.AddDbContext<EventPlanningDbContext>(options => options.UseInMemoryDatabase("EventDb"));
+//    SeedDatabase();
+//}
+
+builder.Services.AddDbContext<EventPlanningDbContext>(options => options.UseInMemoryDatabase("EventDb"));
+SeedDatabase();
 
 var app = builder.Build();
 
