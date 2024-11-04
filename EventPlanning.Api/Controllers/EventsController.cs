@@ -41,6 +41,7 @@ namespace EventPlanning.Server.Controllers
 
         [HttpGet]
         [Route("{eventId:int}")]
+        [Authorize(Roles = "User, Admin")]
         public async Task<EventIndexModel> GetEvent([FromRoute] int? eventId)
         {
             var eventEntity = await _eventRepository.GetAsync(eventId);
@@ -51,7 +52,7 @@ namespace EventPlanning.Server.Controllers
 
         [HttpPost]
         [Route("create")]
-        //[Authorize(Roles = "User, Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(EventCreateModel model)
         {
             try
