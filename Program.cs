@@ -7,12 +7,12 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-//var url = builder.Configuration["ClientUrl"];
-//builder.Services.AddCors(opts => opts.AddPolicy("AllowClient", policy =>
-//policy.WithOrigins($"{builder.Configuration["ClientUrl"]}")
-//    .AllowAnyHeader()
-//    .AllowAnyMethod()
-//    ));
+var url = builder.Configuration["ClientUrl"];
+builder.Services.AddCors(opts => opts.AddPolicy("AllowClient", policy =>
+policy.WithOrigins($"{builder.Configuration["ClientUrl"]}")
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    ));
 
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -31,21 +31,19 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 
 builder.Services.AddControllers();
 
-builder.Services.AddDbContext<EventPlanningDbContext>(options => options.UseInMemoryDatabase("EventDb"));
+var connectionString = builder.Configuration.GetConnectionString("EventDb");
 
-//var connectionString = builder.Configuration.GetConnectionString("EventDb");
-
-//if (connectionString != null && builder.Environment.IsDevelopment())
-//{
-//    builder.Services.AddDbContext<WeatheforecastDbContext>(options => options.UseSqlServer(connectionString));
-//    using var scope = builder.Services.BuildServiceProvider().CreateScope();
-//    var dbContext = scope.ServiceProvider.GetRequiredService<WeatheforecastDbContext>();
-//    dbContext.Database.Migrate();
-//}
-//else
-//{
-//    builder.Services.AddDbContext<WeatheforecastDbContext>(options => options.UseInMemoryDatabase("EventDb"));
-//}
+if (builder.Environment.IsDevelopment() && connectionString != null)
+{
+    builder.Services.AddDbContext<EventPlanningDbContext>(options => options.UseSqlServer(connectionString));
+    using var scope = builder.Services.BuildServiceProvider().CreateScope();
+    var dbContext = scope.ServiceProvider.GetRequiredService<EventPlanningDbContext>();
+    dbContext.Database.Migrate();
+}
+else
+{
+    builder.Services.AddDbContext<EventPlanningDbContext>(options => options.UseInMemoryDatabase("EventDb"));
+}
 
 var app = builder.Build();
 
