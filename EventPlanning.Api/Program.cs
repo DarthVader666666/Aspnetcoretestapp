@@ -1,4 +1,8 @@
+using EventPlanning.Bll.Interfaces;
+using EventPlanning.Bll.Services;
 using EventPlanning.Data;
+using EventPlanning.Data.Entities;
+using EventPlanning.Server.Configurations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -30,19 +34,22 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 });
 
 builder.Services.AddControllers();
+builder.Services.ConfigureAutomapper();
+builder.Services.AddScoped<IRepository<Event>, EventRepository>();
+builder.Services.AddScoped<IRepository<UserEvent>, UserEventRepository>();
+builder.Services.AddScoped<IRepository<User>, UserRepository>();
 
 var connectionString = builder.Configuration.GetConnectionString("EventDb");
 
 if (builder.Environment.IsDevelopment() && connectionString != null)
 {
     builder.Services.AddDbContext<EventPlanningDbContext>(options => options.UseSqlServer(connectionString));
-    using var scope = builder.Services.BuildServiceProvider().CreateScope();
-    var dbContext = scope.ServiceProvider.GetRequiredService<EventPlanningDbContext>();
-    dbContext.Database.Migrate();
+    MigrateDatabase();
 }
 else
 {
     builder.Services.AddDbContext<EventPlanningDbContext>(options => options.UseInMemoryDatabase("EventDb"));
+    SeedDatabase();
 }
 
 var app = builder.Build();
@@ -57,6 +64,20 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+void SeedDatabase()
+{
+    using var scope = builder.Services.BuildServiceProvider().CreateScope();
+    var dbContext = scope.ServiceProvider.GetRequiredService<EventPlanningDbContext>();
+    dbContext.Seed();
+}
+
+void MigrateDatabase()
+{
+    using var scope = builder.Services.BuildServiceProvider().CreateScope();
+    var dbContext = scope.ServiceProvider.GetRequiredService<EventPlanningDbContext>();
+    dbContext.Database.Migrate();
+}
 
 public static class AuthOptions
 {
