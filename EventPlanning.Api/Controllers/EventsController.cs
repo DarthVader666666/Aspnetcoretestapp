@@ -1,6 +1,6 @@
 using EventPlanning.Data;
 using Microsoft.AspNetCore.Mvc;
-using Weatheforecast.Entities;
+using EventPlanning.Data.Entities;
 
 namespace Aspnetcoretestapp.Controllers
 {

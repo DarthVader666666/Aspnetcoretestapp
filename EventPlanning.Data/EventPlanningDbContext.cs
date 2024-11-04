@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Weatheforecast.Entities;
+using EventPlanning.Data.Entities;
+using Microsoft.Extensions.Configuration;
 
 namespace EventPlanning.Data
 {
-    public class EventPlanningDbContext:DbContext
+    public class EventPlanningDbContext: DbContext
     {
         private readonly IConfiguration _configuration;
 

@@ -1,4 +1,4 @@
-﻿namespace Weatheforecast.Entities
+﻿namespace EventPlanning.Data.Entities
 {
     public class SubTheme
     {

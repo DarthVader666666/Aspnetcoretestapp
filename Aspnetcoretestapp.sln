@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aspnetcoretestapp", "Aspnetcoretestapp.csproj", "{A851DB97-FB37-452E-B660-2FD5434060E1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventPlanning.Api", "EventPlanning.Api\EventPlanning.Api.csproj", "{B33885AF-A21E-404A-A63D-4EFF79F783D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventPlanning.Data", "EventPlanning.Data\EventPlanning.Data.csproj", "{2D6DB762-C492-445F-88E2-394F714A1963}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A851DB97-FB37-452E-B660-2FD5434060E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A851DB97-FB37-452E-B660-2FD5434060E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A851DB97-FB37-452E-B660-2FD5434060E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A851DB97-FB37-452E-B660-2FD5434060E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B33885AF-A21E-404A-A63D-4EFF79F783D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B33885AF-A21E-404A-A63D-4EFF79F783D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B33885AF-A21E-404A-A63D-4EFF79F783D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B33885AF-A21E-404A-A63D-4EFF79F783D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D6DB762-C492-445F-88E2-394F714A1963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D6DB762-C492-445F-88E2-394F714A1963}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D6DB762-C492-445F-88E2-394F714A1963}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D6DB762-C492-445F-88E2-394F714A1963}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
